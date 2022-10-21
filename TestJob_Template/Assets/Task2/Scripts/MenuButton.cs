@@ -18,36 +18,33 @@ public class MenuButton : MonoBehaviour, IDragHandler, IEndDragHandler
     private float changeDistance = 1f;
     public int clickCount { get; set; }
 
-    private IEnumerator DragPositionReturn(float currentPositionX) /*Корутин обрабатывает положение в зависиости 
+    private IEnumerator DragPositionReturn() /*Корутин обрабатывает положение в зависиости 
     от позиции в которой был отпущен курсор в методе OnDrag
     -60 - положение к которыму возращается кнопка, если находится  в диапазоне (-70;-50)
     0 - положение к которому возвращается кнопка, если находится в диапазоне (-50;0)*/
     {
         Vector3 intermediatePosition = button.transform.localPosition;
 
-        if (currentPositionX <= -60)
+        if (button.transform.localPosition.x <= -60)
         {
-            for (; button.transform.localPosition.x < -60; currentPositionX += changeDistance)
+            for (; button.transform.localPosition.x < -60; intermediatePosition.x += changeDistance)
             {
-                intermediatePosition.x = currentPositionX;
                 button.transform.localPosition = intermediatePosition;
                 yield return new WaitForSeconds(positionReturnWaitTime);
             }
         }
-        else if (currentPositionX > -60 && currentPositionX <= -50)
+        else if (button.transform.localPosition.x > -60 && button.transform.localPosition.x <= -50)
         {
-            for (; button.transform.localPosition.x > -60; currentPositionX -= changeDistance)
+            for (; button.transform.localPosition.x > -60; intermediatePosition.x -= changeDistance)
             {
-                intermediatePosition.x = currentPositionX;
                 button.transform.localPosition = intermediatePosition;
                 yield return new WaitForSeconds(positionReturnWaitTime);
             }
         }
-        else if (currentPositionX > -50)
+        else if (button.transform.localPosition.x > -50)
         {
-            for (; button.transform.localPosition.x <= 0; currentPositionX += changeDistance)
+            for (; button.transform.localPosition.x <= 0; intermediatePosition.x += changeDistance)
             {
-                intermediatePosition.x = currentPositionX;
                 button.transform.localPosition = intermediatePosition;
                 yield return new WaitForSeconds(positionReturnWaitTime);
             }
@@ -79,7 +76,7 @@ public class MenuButton : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (PositionReturnCoroutine != null)
             StopCoroutine(PositionReturnCoroutine); //Остановка действуещего корутина, если во время его работы еще раз потянуть за кнопку
-        PositionReturnCoroutine = StartCoroutine(DragPositionReturn(button.transform.localPosition.x));
+        PositionReturnCoroutine = StartCoroutine(DragPositionReturn());
     }
 
     private void OnMouseDown()
