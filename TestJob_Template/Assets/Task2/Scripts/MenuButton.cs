@@ -8,8 +8,8 @@ using TMPro;
 public class MenuButton : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     [SerializeField] AddItem addItem;
-    [SerializeField] Transform textField;
-    [SerializeField] Transform XMarkTextField;
+    [SerializeField] Text buttonText;
+    [SerializeField] TMP_Text xMarkText;
     [SerializeField] GameObject button;
 
     Coroutine PositionReturnCoroutine;
@@ -96,7 +96,6 @@ public class MenuButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void SetText()
     {
-        Text buttonText = textField.GetComponent<Text>();
         if (clickCount == 1)
             buttonText.text = $"- Item - {{{clickCount}}} click";
         else
@@ -114,8 +113,8 @@ public class MenuButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private void Update()
     {
-        TMP_Text XMark = XMarkTextField.GetComponent<TMP_Text>();
         float alphaColor = (Mathf.Abs(button.transform.localPosition.x) / 100) * 2f;
-        XMark.color = new Color(XMark.color.r, XMark.color.g, XMark.color.b, alphaColor - 0.2f); // -0.2f позволяет отметке проявлятся позже, делая анимацию более заметной
+        xMarkText.color = 
+            new Color(xMarkText.color.r, xMarkText.color.g, xMarkText.color.b, alphaColor - 0.2f); // -0.2f позволяет отметке проявлятся позже, делая анимацию более заметной
     }
 }

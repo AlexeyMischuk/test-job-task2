@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addItem: {fileID: 202425869}
-  textField: {fileID: 42316268}
-  XMarkTextField: {fileID: 1646591514}
+  buttonText: {fileID: 42316269}
+  xMarkText: {fileID: 1646591515}
   button: {fileID: 2018936019}
 --- !u!1 &1176658612
 GameObject:
@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 1646591516}
   - component: {fileID: 1646591515}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TMP_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
